@@ -1,0 +1,69 @@
+/* page, content and map-div need to be 100% width and height for map to show */
+#map-show-page,
+#map-show-content,
+#map-div {
+    width: 100%;
+    height: 100%;
+    padding: 0px;
+}
+
+img[data-icon="marker"] {
+	background:url(../images/icon-marker.png) no-repeat center center;
+	background-size: 13px 21px;
+	width: 13px;
+	height: 21px;
+}
+
+#map-show-footer .ui-icon-marker {
+	background:transparent url(../images/icon-marker.png) no-repeat center center;
+	width:13px;
+	height:21px;
+}
+
+
+/* Icon View */
+
+/* home screen icons */
+#list-mshell-show-page .icon-map {
+	width:20px;
+	height:21px;
+	background:url(../images/icon-map.png) no-repeat center center;
+	background-size: 20px 21px;
+}
+#icon-mshell-show-page .icon-map {
+	background:url(../images/icon-map.png) no-repeat center center;
+	background-size: 20px 21px;
+}
+
+
+/* Retina iPhone 4 - make sure we don't pick up iPad Retinia */
+/* -------------------------------------------------------------------------------------------------- */
+@media only screen and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) and (max-width: 767px),
+       only screen and (-webkit-min-device-pixel-ratio: 2) and (orientation: landscape) and (max-width: 800px){
+    
+    #list-mshell-show-page .icon-map,
+    #icon-mshell-show-page .icon-map {
+    	background:url(../images/icon-map-2x.png) no-repeat center center;
+    	background-size: 20px 21px;
+    }
+
+    img[data-icon="marker"] {
+    	background:url(../images/icon-marker-2x.png) no-repeat center center;
+    	background-size: 13px 21px;
+    }
+
+    #map-show-footer .ui-icon-marker {
+    	background:transparent url(../images/icon-marker-2x.png) no-repeat center center;
+    	background-size: 13px 21px;
+    }
+}
+
+/* Tablet - don't pick up Galaxy phones with resolution up to 800 */
+/* -------------------------------------------------------------------------------------------------- */
+@media only screen and (orientation: portrait) and (min-width: 768px),
+       only screen and (orientation: landscape) and (min-width: 1024px){
+    #icon-mshell-show-page .icon-map {
+    	background:url(../images/icon-map-tablet.png) no-repeat center center;
+    	background-size: 26px 27px;
+    }
+}

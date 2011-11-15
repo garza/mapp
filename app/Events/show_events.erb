@@ -1,0 +1,69 @@
+<!-- 
+#################################################################################
+# © 2010 SunGard Higher Education.  All Rights Reserved.
+#
+# CONFIDENTIAL BUSINESS INFORMATION
+#
+# THIS PROGRAM IS PROPRIETARY INFORMATION OF SUNGARD HIGHER EDUCATION
+# AND IS NOT TO BE COPIED, REPRODUCED, LENT, OR DISPOSED OF,
+# NOR USED FOR ANY PURPOSE OTHER THAN THAT WHICH IT IS SPECIFICALLY PROVIDED
+# WITHOUT THE WRITTEN PERMISSION OF THE SAID COMPANY -->
+
+<%
+  eventsByDate = get_events_by_date()
+  eventFound = false
+  title = get_page_title()
+%>
+
+<div id="events-show-events-page" data-role="page">
+    <div data-role="header" data-position="fixed" data-theme="f" data-cache="false" class="imageButtons">		 	    
+	   <a href="<%= Mshell.show_url %>" data-direction="reverse"><img data-icon="back" src="<%= Mshell.path %>/images/blank.gif"/></a>
+        <h1><%= title %></h1>
+        <img data-icon="menu" src="<%= Mshell.path %>/images/blank.gif" class="menu-link">
+    </div><!-- /header -->
+
+	<div data-role="content">
+	    <!-- Menu -->
+	    <div class="menu-tab"><img data-icon="menu" src="<%= Mshell.path %>/images/blank.gif"></div>
+		<div class="menu">	
+			<ul>
+        		<li><a href="<%= Mshell.show_url %>" data-direction="reverse" class="home"><%= Locale::Mc[:label_home] %></a></li>
+			</ul>
+			<br class="clear"/>
+		</div><!-- /Menu -->
+        
+		<ul data-role="listview" data-theme="h" id="eventList" data-dividertheme="g">
+		    <% if eventsByDate %>
+    			<% eventsByDate.each_key do |processingDate| %>
+        			<% eventsForOneDate = eventsByDate[get_formatted_date(processingDate)] %>
+    				<% if eventsForOneDate && eventsForOneDate.length > 0 %>
+    					<li data-role="list-divider"><%=get_day(processingDate)%><span class="ui-li-aside"><%=get_formatted_date(processingDate, "%m/%d/%Y")%></span></li>									
+    					<% eventsForOneDate.each do |event| %>
+    					    <% eventFound = true %>				
+        					<li>						
+        						<a href="<%= url_for :action => :show_event, :query => {:uid => event['uid']} %>">
+        							<h3><%=event['summary']%></h3>
+        							<p><strong><%=event['startTime']%><%if event['endTime'] %> - <%=event['endTime']%>	<%end%></strong></p>
+        						</a>
+        					</li>
+        				<% end 
+						end
+					end
+				end%>				
+    			<% if !eventFound %>
+					 <li><%= Locale::Events[:message_no_results] %></li>
+				<% end %>
+		</ul>		
+	</div><!-- /content -->
+	
+	<div id="events-show-events-footer" data-role="footer" data-position="fixed" data-theme="f">
+		<div data-role="navbar">
+			<ul>
+				<li><a href="<%= url_for(:action => :show_categories) %>" id="navbar-all" data-icon="categories" data-iconpos="top"><%= Locale::Events[:label_categories] %></a></li>
+				<li><a href="<%= url_for( :action => :show_calendars) %>" data-icon="event-calendars" data-iconpos="top"><%= Locale::Events[:label_calendars] %></a></li>
+				<li><a href="<%= url_for( :action => :show_search) %>" data-icon="mc-search" data-iconpos="top"><%= Locale::Events[:label_search] %></a></li>
+			</ul>
+		</div>
+	</div><!-- /footer -->
+	
+</div>

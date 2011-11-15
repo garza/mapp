@@ -1,0 +1,67 @@
+<!-- 
+#################################################################################
+# © 2010 SunGard Higher Education.  All Rights Reserved.
+#
+# CONFIDENTIAL BUSINESS INFORMATION
+#
+# THIS PROGRAM IS PROPRIETARY INFORMATION OF SUNGARD HIGHER EDUCATION
+# AND IS NOT TO BE COPIED, REPRODUCED, LENT, OR DISPOSED OF,
+# NOR USED FOR ANY PURPOSE OTHER THAN THAT WHICH IT IS SPECIFICALLY PROVIDED
+# WITHOUT THE WRITTEN PERMISSION OF THE SAID COMPANY -->
+
+<div id="events-show-categories-page" data-role="page" data-cache="false">
+    <div data-role="header" data-position="fixed" data-theme="f" class="imageButtons">
+        <a href="<%= url_for( :action => :index ) %>" data-direction="reverse"><img data-icon="back" src="<%= Mshell.path %>/images/blank.gif"/></a>
+        <h1><%= Locale::Events[:title_event_categories] %></h1>
+		<img data-icon="menu" src="<%= Mshell.path %>/images/blank.gif" class="menu-link">		
+    </div><!-- /header -->
+
+	<div data-role="content" data-theme="g" >
+       <!-- Menu -->
+	    <div class="menu-tab"><img data-icon="menu" src="<%= Mshell.path %>/images/blank.gif"></div>
+		<div class="menu">	
+			<ul>
+        		<li><a href="<%= Mshell.show_url %>" data-direction="reverse" class="home"><%= Locale::Mc[:label_home] %></a></li>
+			</ul>
+			<br class="clear"/>
+		</div><!-- /Menu -->
+	    
+		<div class="listContainer">
+			<div class="listContainerInner">
+				<ul data-role="listview" data-theme="h">					
+					<li> 
+						<a href="<%= url_for :action => :get_category_events, :query => {:category => 'all', :title => Locale::Events[:label_all]} %>"><%= Locale::Events[ :label_all_categories ]%>
+						    <img class="colorBlock color0 ui-li-icon"/>
+					    </a> 
+					</li> 
+					<% 
+						categoryList = get_categories_list_result()
+						color_number = 0
+						if categoryList && categoryList.length > 0
+    						categoryList.each do |category|
+        					    color_number += 1
+								categoryName = category['name'].downcase.gsub(/\b\w/){$&.upcase}
+					%>
+            					<li>									
+            						<a href="<%= url_for :action => :get_category_events, :query => {:category => category['id'], :title => categoryName} %>">            						    
+										<img class="colorBlock color<%= color_number % 8 %> ui-li-icon"/>
+                                        <%=categoryName%>
+                                    </a>
+            					</li>
+    					<% end %>
+					<% end %>					
+				</ul>
+			</div>
+		</div>
+	</div><!-- /content -->
+
+	<div id="events-show-categories-footer" data-role="footer" data-position="fixed" data-theme="f">
+		<div data-role="navbar">
+			<ul>
+				<li><a href="<%= url_for( :action => :show_calendars) %>" class="event-calendars" data-icon="event-calendars" data-iconpos="top"><%= Locale::Events[:label_calendars] %></a></li>
+				<li><a href="<%= url_for( :action => :show_search) %>" data-icon="mc-search" class="event-search" data-iconpos="top"><%= Locale::Events[:label_search] %></a></li>
+			</ul>
+		</div>
+	</div><!-- /footer -->
+	
+</div>

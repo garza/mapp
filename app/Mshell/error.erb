@@ -1,0 +1,33 @@
+<!-- 
+#################################################################################
+# © 2010 SunGard Higher Education.  All Rights Reserved.
+#
+# CONFIDENTIAL BUSINESS INFORMATION
+#
+# THIS PROGRAM IS PROPRIETARY INFORMATION OF SUNGARD HIGHER EDUCATION
+# AND IS NOT TO BE COPIED, REPRODUCED, LENT, OR DISPOSED OF,
+# NOR USED FOR ANY PURPOSE OTHER THAN THAT WHICH IT IS SPECIFICALLY PROVIDED
+# WITHOUT THE WRITTEN PERMISSION OF THE SAID COMPANY -->
+
+<div data-role="dialog" id="mshell-error-page" data-add-back-btn="false" data-theme="g">
+    <div data-role="header" data-theme="g">
+        <h1><%= Locale::Mc[:title_error] %></h1> 
+    </div>
+
+    <div data-role="content" data-theme="g">
+        <div class="listContainer">
+            <div class="listContainerInner">
+                <% if (@params['error_message']) %>
+                    <div id="error-message">
+                        <%=@params['error_message']%>
+                    </div>
+                <%end%>
+
+                <div>
+                    <% url = @params['destination_url'] ? @params['destination_url'] : url_for( :controller => :Mshell, :action => :show ) %>
+                    <a href="<%= url %>" data-role="button" data-inline="true" data-transition="pop" data-direction="reverse" data-theme="g"><%= Locale::Mc[:label_close] %></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

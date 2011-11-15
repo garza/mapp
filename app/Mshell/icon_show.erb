@@ -1,0 +1,67 @@
+<!-- 
+#################################################################################
+# © 2010 SunGard Higher Education.  All Rights Reserved.
+#
+# CONFIDENTIAL BUSINESS INFORMATION
+#
+# THIS PROGRAM IS PROPRIETARY INFORMATION OF SUNGARD HIGHER EDUCATION
+# AND IS NOT TO BE COPIED, REPRODUCED, LENT, OR DISPOSED OF,
+# NOR USED FOR ANY PURPOSE OTHER THAN THAT WHICH IT IS SPECIFICALLY PROVIDED
+# WITHOUT THE WRITTEN PERMISSION OF THE SAID COMPANY -->
+
+<div data-role="page" id="icon-mshell-show-page" data-theme="g" data-cache="false" data-add-back-btn="false">
+
+    <div data-role="header" data-theme="f" data-position="fixed">
+        <img data-icon="logo" src="images/blank.gif" class="headerLogo">
+        <img data-icon="menu" src="images/blank.gif" class="menu-link">
+    </div><!-- /header -->
+
+	<div data-role="content">
+	    <div class="menu-tab"><img data-icon="menu" src="images/blank.gif"></div>
+		<div class="menu">	
+			<ul>
+			    <% if Mshell.is_logged_in? %>
+    				<li><a href="<%= url_for({ :controller => :Mshell, :action => :async_logout}) %>" data-transition="fade" class="signOut signOut-link"><%= Locale::Mshell[:label_logout] %></a></li>
+			    <% else %>
+    				<li><a href="<%= url_for({ :controller => :Mshell, :action => :show_login}) %>" data-transition="pop" class="signIn signIn-link"><%= Locale::Mshell[:label_login] %></a></li>
+        		<% end %>
+        		<li><a href="#" id="mode" class="list-view" data-mode="list"><%= Locale::Mshell[:label_list_view]%></a></li>
+			</ul>
+			<br style="clear:both;"/>
+		</div>
+		
+        <div class="ui-grid-c" id="icon-view">
+    		<% 
+    		    count = -1
+                Mshell.get_mapps_for_launch().each do |mapp|
+                    count += 1
+                    mapp_url = url_for ({ :action => :launch_mapp, :query => { :id => mapp.id } })
+                    if mapp.login_before_launch
+    	                mapp_url = url_for ({ :action => :show_login,
+    	                    :query => { :launch_mapp_id => mapp.id, :mapp_jqm_enabled => mapp.jqm_enabled } })
+                    end
+                    external_link = !mapp.jqm_enabled && !mapp.login_before_launch
+            %>
+                <div class="ui-block-<%= (97 + (count % 4)).chr %>">
+                    <a href="<%= mapp_url %>" <% if external_link %>rel="external"<% end %>>
+                        <div <% if mapp.login_before_launch %> class="locked" <% end %> >
+                            <span class="icon-<%= mapp.id %>"></span>
+                        </div>
+                        <% if mapp.label %>
+                            <span class="label"><%= mapp.label %></span>
+                        <% end %>
+                    </div>
+                </a>
+            <% end %>
+        </div>
+            
+	</div><!-- /content -->
+	
+	<div data-role="footer" data-theme="f" data-position="fixed" class="ui-bar">
+	    <% if Mshell.is_logged_in? %>
+    	    <h4><a href="<%= url_for({ :controller => :Mshell, :action => :async_logout}) %>" data-transition="fade" class="footerLogIn signOut-link"><%= Locale::Mshell[:label_logout] %></a></h4>
+	    <% else %>
+    		<h4><a href="<%= url_for({ :controller => :Mshell, :action => :show_login}) %>" data-rel="dialog" data-transition="pop" class="footerLogIn signIn-link"><%= Locale::Mshell[:label_login] %></a></h4>
+		<% end %>
+    </div><!-- /footer -->
+</div><!-- /page -->

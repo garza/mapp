@@ -1,0 +1,151 @@
+* {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+}
+
+.selectable, input, textarea {
+    -webkit-user-select: auto;
+}
+
+html body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+div#header {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 44px;
+    top: 0px;
+    left: 0px;
+    z-index: 0;
+}
+
+div#background {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    -webkit-background-size: 100% 100%;
+    z-index: 0;
+}
+
+div#logo {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    opacity: 0.15;
+    z-index: 1;
+}
+
+div#noTouchy {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    opacity: 0.0;
+    z-index: 30;
+}
+
+div#loginBackground {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    -webkit-background-size: 100% 100%;
+    z-index: 0;
+    ttop: 43px;
+    lleft: 0px;
+}
+
+div#login {
+    position: fixed;
+    color: #fff;
+    text-align: center;
+    border:3px solid #fff;
+	-webkit-box-shadow:0 1px 0 #fff;
+    opacity: 0.92;
+    z-index: 31;
+}
+
+div#login .label {
+    text-align: left;
+    clear: left;
+    float:left;
+}
+
+div#login .input {
+    text-align: left;
+    float:left;
+}
+
+div#login .clear {
+    clear: both;
+}
+
+div#loginButtons {
+    clear: both;
+}
+
+div#loginWait {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 32;
+}
+
+div#header {
+    position: relative;
+    z-index: 1;
+}
+
+#background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+div#apps {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+div#apps_view {
+    overflow: hidden;
+    position: relative;
+}
+
+div#apps_view a {
+    float: left;
+}
+
+div.app_icon {
+    text-align: center;
+    color: #fff;
+    overflow: hidden;
+}
+
+div.icon {
+    position: relative;
+}
+
+div.app_with_icon img.icon {
+    z-index: 1;
+}
+
+div.lock {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 20;
+}

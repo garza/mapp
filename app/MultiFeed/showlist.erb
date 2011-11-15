@@ -1,0 +1,54 @@
+<!-- 
+#################################################################################
+# © 2011 SunGard Higher Education.  All Rights Reserved.
+#
+# CONFIDENTIAL BUSINESS INFORMATION
+#
+# THIS PROGRAM IS PROPRIETARY INFORMATION OF SUNGARD HIGHER EDUCATION
+# AND IS NOT TO BE COPIED, REPRODUCED, LENT, OR DISPOSED OF,
+# NOR USED FOR ANY PURPOSE OTHER THAN THAT WHICH IT IS SPECIFICALLY PROVIDED
+# WITHOUT THE WRITTEN PERMISSION OF THE SAID COMPANY -->
+
+<%
+  feed_list = get_feeds()
+%>
+
+<div id="feed-list-page" data-role="page" data-theme="g">
+
+    <div data-role="header" data-position="fixed" data-position="inline" data-theme="f" class="imageButtons">
+        <a href="<%= Mshell.show_url %>" data-rel="back"><img data-icon="back" src="<%= Mshell.path %>/images/blank.gif"/></a>
+        <h1><%=Mshell.current_mapp.title%></h1>
+        <img data-icon="menu" src="<%= Mshell.path %>/images/blank.gif" class="menu-link">
+    </div><!-- /header -->
+
+    <div data-role="content">
+	    <div class="menu-tab"><img data-icon="menu" src="<%= Mshell.path %>/images/blank.gif"></div>
+		<div class="menu">	
+			<ul>
+			    <% if Mshell.is_logged_in? %>
+   				<li id="directory-sign-out-menu"><a href="<%= url_for({ :controller => :Mshell, :action => :async_logout}) %>" data-transition="pop" data-direction="reverse" class="signOut signOut-link"><%= Locale::Mshell[:label_logout] %></a></li>
+			    <% else %>
+   				<li id="directory-sign-in-menu"><a href="<%= url_for({ :controller => :Mshell, :action => :show_login}) %>" data-transition="pop" class="signIn signIn-link"><%= Locale::Mshell[:label_login] %></a></li>
+       		<% end %>
+       		<li><a href="<%= Mshell.show_url %>" data-direction="reverse" class="home"><%= Locale::Mc[:label_home] %></a></li>
+			</ul>
+			<br class="clear"/>
+		</div>
+	
+        <%
+            if feed_list && feed_list.length > 0
+                index = 0
+                feed_list.each do |entry|
+        %>
+                    <a href="<%= url_for ({ :action => :showFeed, :query => {:feed => entry['feedid']} }) %>" data-role="button"><%= entry['feedname'] %></a>
+        <%
+                    index +=1
+                end
+            else
+        %>
+        <%
+            end
+        %>
+	</div><!-- /content -->
+	
+</div><!-- /page -->

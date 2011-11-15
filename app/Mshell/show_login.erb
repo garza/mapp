@@ -1,0 +1,48 @@
+<!-- 
+#################################################################################
+# © 2010 SunGard Higher Education.  All Rights Reserved.
+#
+# CONFIDENTIAL BUSINESS INFORMATION
+#
+# THIS PROGRAM IS PROPRIETARY INFORMATION OF SUNGARD HIGHER EDUCATION
+# AND IS NOT TO BE COPIED, REPRODUCED, LENT, OR DISPOSED OF,
+# NOR USED FOR ANY PURPOSE OTHER THAN THAT WHICH IT IS SPECIFICALLY PROVIDED
+# WITHOUT THE WRITTEN PERMISSION OF THE SAID COMPANY -->
+
+<div data-role="dialog" id="mshell-login-page" data-cache="false" data-add-back-btn="false" data-theme="g">
+    <div data-role="header" data-theme="g">
+        <h1><%= Locale::Mshell[:title_login] %></h1> 
+    </div>
+
+    <div data-role="content" data-theme="g">
+        <div class="listContainer">
+            <div class="listContainerInner">
+                <div id="login-login-failed">
+                    <%= Locale::Mshell[:label_login_failed] %>
+                </div>       
+                <form id="list-login-form" action="<%= url_for(:action => :login) %>">
+                    <input type="hidden" name="launch-mapp-id" id="launch-mapp-id" value="<%=  @launch_mapp_id %>">
+                    <input type="hidden" id="mapp-jqm-enabled" value="<%= @mapp_jqm_enabled %>">
+                    <input type="hidden" id="login-url" value="<%= @login_url %>">
+                    <input type="hidden" id="login-success-url" value="<%= @login_success_url %>">
+                    <input type="hidden" id="login-not-authorized-url" value="<%= @login_not_authorized_url %>">
+                    <fieldset data-role="controlgroup">
+                        <input type="text" name="userid" id="login-userid" placeholder="<%= Locale::Mshell[:label_user_id] %>" value="<%= @cached_login_id %>" autocapitalize="off" autocorrect="off" class="textInput"/>
+                    </fieldset>
+                    <fieldset data-role="controlgroup">
+                        <input type="password" name="password" id="login-password" placeholder="<%= Locale::Mshell[:label_password] %>" class="textInput">
+                    </fieldset>
+                    <fieldset data-role="controlgroup">
+                        <input type="checkbox" name="remember-id" id="login-remember-id" checked="true" data-theme="g">
+                        <label for="login-remember-id" data-theme="g"><%= Locale::Mshell[:label_remember_id] %></label>
+                    </fieldset>
+
+                    <div>
+                        <a href="/app/Mshell/show" data-role="button" data-inline="true" data-transition="pop" data-direction="reverse" data-theme="g"><%= Locale::Mshell[:label_cancel] %></a>
+                        <input type="submit" data-inline="true" data-theme="g" value="<%= Locale::Mshell[:label_login] %>"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

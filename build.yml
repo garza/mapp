@@ -1,0 +1,26 @@
+--- 
+sdk: /Users/garza/.rvm/gems/ruby-1.9.2-p180/gems/rhodes-3.2.1
+sdkversion: 3.0.2
+name: SunGardU
+version: 1.0
+vendor: sungardhe
+build: debug
+bbver: 6.0
+wmsdk: Windows Mobile 6 Professional SDK (ARMV4I)
+applog: rholog.txt
+iphone: 
+  configuration: Debug
+  sdk: iphonesimulator5.0
+  provisionprofile: 
+  codesignidentity: 
+  entitlements: 
+  BundleIdentifier: com.sungardhe.mobileapp
+  BundleURLScheme: SunGardU
+android: 
+  BundleURLScheme: SunGardU
+wp: 
+  productid: c5139fc0-736b-012e-8deb-442c0330acf0
+extensions: 
+- json
+- gps
+mapping: yes

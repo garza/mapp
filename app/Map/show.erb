@@ -1,0 +1,69 @@
+<% if System::get_property('platform') == 'APPLE' %>
+	<link href="/public/js/rhogeolocation.js"/>
+<% else %>
+	<% if System::get_property('platform') == 'Blackberry' %>
+		<!-- bb specific css import for this mapp -->
+	<% else %>	
+		<link href="/public/js/rhogeolocation-wm.js"/>
+	<% end %>
+<% end %>
+<div id="map-show-page" data-role="page" data-swipe="ignore">
+    <!-- Header -->
+    <div id="map-show-header" data-role="header" data-theme="f" class="imageButtons" data-latitude="" data-longitude="">
+        <a href="<%= Mshell.show_url %>" data-rel="back"><img data-icon="back" src="<%= Mshell.path %>/images/blank.gif"/></a>
+        <h1><%= Mshell.current_mapp.title %></h1>
+        <img data-icon="menu" src="<%= Mshell.path %>/images/blank.gif" class="menu-link">
+    </div>
+    <!-- CONTENT -->
+    <div id="map-show-content" data-role="content" data-theme="g">
+        <!-- Menu -->
+        <div class="menu-tab"><img data-icon="menu" src="<%= Mshell.path %>/images/blank.gif"></div>
+        <div class="menu">	
+            <ul>
+        		<li><a href="<%= Mshell.show_url %>" data-direction="reverse" class="home"><%= Locale::Mc[:label_home] %></a></li>
+
+        		<li><a href="<%= url_for :action => :places %>" data-rel="dialog" data-transition="slideup" class="search">Search Map</a></li>
+            </ul>
+            <br class="clear"/>
+    	</div><!-- /Menu -->
+
+        <div id="map-div"></div>
+
+        <!-- more menu -->
+        <div id="more-menu">
+            <ul data-role="listview" data-theme="i">
+                <% (3..@maps.length-1).each { |index|
+                    map = @maps[index] 
+                    icon = map['icon'] ? map['icon'] : "marker"%>
+                    <li>
+                        <a href="#" data-role="radio-button">
+                        <img data-icon="<%=icon%>" src="<%= Mshell.path %>/images/blank.gif" class="ui-li-icon"/><%= map['name'] %></a>
+                    </li>
+                <% } %>
+            </ul>
+        </div><!-- /more menu -->
+    </div>
+
+    <!-- FOOTER -->
+    <div id="map-show-footer" data-role="footer" data-theme="f">
+        <div data-role="navbar">
+            <ul>
+                <% useMore = @maps.length > 4
+                   lastIndex = useMore ? 2 : 3
+                   (0..[lastIndex,@maps.length-1].min).each { |index|
+                       map = @maps[index]
+                       icon = map['icon'] ? map['icon'] : "marker"%>
+                    <li>
+                        <a href="#" data-iconpos="top" data-role="radio-button" data-title="<%=map['name']%>" data-srcid="2052993" data-map="<%= map['name']%>" data-icon="<%=icon%>" 
+							<% if index == 0 %>class="ui-btn-active"<% end %>>
+                        <%= map['name'] %></a>
+                    </li>
+                <% } %>
+                <% if useMore %>
+                    <li><a href="#" data-icon="mc-more" data-iconpos="top" id="more-link"><More><%= Locale::Mc[ :message_no_results ] %></a></li>
+                <% end %>
+            </ul>
+        </div>
+    </div>
+
+</div>

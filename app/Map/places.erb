@@ -1,0 +1,41 @@
+<div id="search-show-page" data-role="page" data-swipe="ignore">
+    <!-- Header -->
+    <div id="map-show-header" data-role="header" data-theme="f" class="imageButtons" data-latitude="" data-longitude="">
+        <a href="<%= Mshell.show_url %>" data-rel="back"><img data-icon="back" src="<%= Mshell.path %>/images/blank.gif"/></a>
+        <h1><%= Mshell.current_mapp.title %></h1>
+        <img data-icon="menu" src="<%= Mshell.path %>/images/blank.gif" class="menu-link">
+    </div>
+	<!-- CONTENT -->
+	<div class="content-primary" data-role="content">
+		<ul data-role="listview" data-filter="true" class="ui-listview" data-divdertheme="g">
+			<li data-theme="c" class="ui-btn ui-btn-icon-right ui-li ui-btn-down-c ui-btn-up-c">
+				<div class="ui-btn-inner ui-li">
+					<div class="ui-btn-text">
+						<a href="<%= url_for :action => :show %>" data-transition="slidedown" class="ui-link-inherit place">BB</a>
+					</div>
+					<span class="ui-icon ui-icon-arrow-r"></span>
+				</div>
+			</li>
+			<li data-theme="c" class="ui-btn ui-btn-icon-right ui-li ui-btn-down-c ui-btn-up-c">
+				<div class="ui-btn-inner ui-li">
+					<div class="ui-btn-text">
+						<a href="<%= url_for({ :controller => :Mshell, :action => :launch_mapp, :query => { :id => "map" } }) %>" class="ui-link-inherit place">BB</a>
+					</div>
+					<span class="ui-icon ui-icon-arrow-r"></span>
+				</div>
+			</li>
+		</ul>
+	</div>
+</div>
+<script type="text/javascript">
+//event handler for navigation button clicks
+$('a.[place"]').live('click', function() {
+	console.dir(this);
+	console.log("let's do this!")
+	$('.ui-dialog').dialog('close');
+	//$("#search-show-page").
+    //return true
+});
+
+
+</script>

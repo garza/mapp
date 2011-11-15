@@ -1,0 +1,230 @@
+[id^="events-"][data-role="page"],
+[id^="events-"] [data-role="content"] {
+    hheight: 100%;
+}
+
+.colorBlock {
+	border:solid 1px rgba(255, 255, 255, 0.6);
+	-webkit-border-radius:2px;
+	background:#000F59 -webkit-gradient(linear,50% 1%,50% 97%,
+	color-stop(0, rgba(255, 255, 255, 0.40)),
+	color-stop(1, rgba(255, 255, 255, 0)));
+	width:18px;
+	height:18px;
+	-webkit-background-clip:padding-box;
+}
+
+.color0 { background-color:#000F59; }
+.color1 { background-color:#00594C; }
+.color2 { background-color:#003659; }
+.color3 { background-color:#590000; }
+.color4 { background-color:#495900; }
+.color5 { background-color:#593A00; }
+.color6 { background-color:#2F0059; }
+.color7 { background-color:#009983; }
+
+#events-show-categories-page [data-role="listview"],
+#events-show-calendars-page [data-role="listview"] {
+    margin: 0px 0px;
+}
+
+#events-show-categories-page .ui-li-icon,
+#events-show-calendars-page .ui-li-icon {
+    left: 0px;
+}
+
+#events-show-categories-page .ui-li-has-icon .ui-btn-inner a.ui-link-inherit, .ui-li-static.ui-li-has-icon,
+#events-show-calendars-page .ui-li-has-icon .ui-btn-inner a.ui-link-inherit, .ui-li-static.ui-li-has-icon {
+    padding-left: 30px;
+}
+
+/* Events specific Styles: move to separate stylesheet */
+#eventList .ui-li-aside {
+	margin-top:0;
+}
+
+#eventList .eventNotFound {
+	text-align:center;
+	font-size:14.5px;
+}
+
+#eventList .colorBlock {
+	margin:12px 0px 0px 10px;
+	-webkit-border-radius:6px;
+}
+
+#eventList a {
+	padding: 0.3em 75px 0.3em 10px;
+}
+
+#eventList h3 {
+	font-size:13px;
+}
+
+.eventDetail {
+	border:solid 2px rgba(171, 188, 201, 0.8);
+	background:-webkit-gradient(linear,50% -0%,50% 100%,
+	color-stop(0, rgba(255, 255, 255, 1)),
+	color-stop(0.577494, rgba(231, 241, 252, 1)),
+	color-stop(1, rgba(210, 230, 250, 1)));
+	-webkit-border-radius:5px;
+	padding:8px;
+	font-size:14.5px;
+	margin-bottom:10px;
+}
+
+.eventDetail h3 {
+	color:#003659;
+	font-size:14.5px;
+	margin:0;
+	padding:0;
+}
+
+.eventDetail ul {
+	margin:-8px;
+	padding:0;
+}
+
+.eventDetail ul li {
+	border-bottom:1px rgba(88, 121, 147, 0.5) solid;
+	list-style:none;
+	
+}
+
+.eventDetail ul li:last-child {
+	border-bottom-width:0;
+}
+
+.eventDetail ul li div {
+	float:left;
+}
+
+.eventDetail ul li div:first-child {
+	width:5em;
+	font-weight:normal;
+}
+
+.eventDetail ul li a:link,
+.eventDetail ul li a:visited {
+	display:block;
+	color:#333;
+	text-decoration:none;
+	font-weight:normal;
+	padding:8px;
+}
+
+.emailIcon div {
+	width:65%;
+	overflow:hidden;
+	text-overflow:ellipsis;
+}
+
+/* EVENTS ICONS FOR FOOTER NAVBAR */
+#events-show-calendars-page .ui-icon-categories,
+#events-show-events-page .ui-icon-categories,
+#events-show-event-detail-page .ui-icon-categories {
+	background:transparent url(../images/icon-list.png) no-repeat center center;
+	width:22px;
+	height:22px;
+}
+
+#events-show-categories-page .ui-icon-event-calendars,
+#events-show-calendars-page .ui-icon-event-calendars,
+#events-show-events-page .ui-icon-event-calendars,
+#events-show-search-page .ui-icon-event-calendars,
+#events-show-event-detail-page .ui-icon-event-calendars  {
+	background:transparent url(../images/icon-events.png) no-repeat center -2px;
+	width:20px;
+	height:22px;
+}
+
+#events-show-search-page .hidden-submit {
+    position: absolute;
+    left: -9999px
+}
+
+/* DATE NAVIGATION */
+/* hide input from viewport */
+.eventDateInput {
+	position:absolute;
+	left:-999px;
+	top:-999px;
+}
+
+.dateNav {
+	margin:0;
+	padding:0 !important;
+	text-align:center;
+}
+
+.dateNav div {
+	margin:0;
+	padding:0;
+}
+
+.dateNav #dateNavLink:link,
+.dateNav #dateNavLink:visited {
+	text-decoration:none;
+	color:#333;
+	margin:0;
+	padding:10px;
+	display:block;
+	background:-webkit-gradient(linear,50% 1%,50% 100%,
+	color-stop(0, rgba(255, 255, 255, 1)),
+	color-stop(0.50, rgba(245, 245, 245, 1)),
+	color-stop(0.51, rgba(230, 230, 230, 1)),
+	color-stop(1, rgba(217, 217, 217, 1)));
+}
+
+/* Icon View */
+
+/* home screen icon */
+#list-mshell-show-page .icon-events {
+	width:20px;
+	height:20px;
+	background:url(../images/icon-events.png) no-repeat center center;
+	background-size: 20px 22px;
+}
+#icon-mshell-show-page .icon-events {
+	background:url(../images/icon-events.png) no-repeat center center;
+	background-size: 20px 22px;
+}
+
+
+/* Retina iPhone 4 - make sure we don't pick up iPad Retinia */
+/* -------------------------------------------------------------------------------------------------- */
+@media only screen and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) and (max-width: 767px),
+       only screen and (-webkit-min-device-pixel-ratio: 2) and (orientation: landscape) and (max-width: 800px){
+
+   #list-mshell-show-page .icon-events,
+   #icon-mshell-show-page .icon-events {
+    	background:url(../images/icon-events-2x.png) no-repeat center center;
+    	background-size: 20px 22px;
+    }
+
+    #events-show-calendars-page .ui-icon-categories,
+    #events-show-events-page .ui-icon-categories,
+    #events-show-event-detail-page .ui-icon-categories {
+    	background:transparent url(../images/icon-list-2x.png) no-repeat center center;
+    	background-size: 22px 12px;
+    }
+
+    #events-show-categories-page .ui-icon-event-calendars,
+    #events-show-calendars-page .ui-icon-event-calendars,
+    #events-show-events-page .ui-icon-event-calendars,
+    #events-show-search-page .ui-icon-event-calendars,
+    #events-show-event-detail-page .ui-icon-event-calendars  {
+    	background:transparent url(../images/icon-events-2x.png) no-repeat center -2px;
+    	background-size: 20px 22px;
+    }
+}
+
+/* Tablet - don't pick up Galaxy phones with resolution up to 800 */
+/* -------------------------------------------------------------------------------------------------- */
+@media only screen and (orientation: portrait) and (min-width: 768px),
+       only screen and (orientation: landscape) and (min-width: 1024px){
+    #icon-view .icon-events {
+    	background:url(../images/icon-events-tablet.png) no-repeat center center;
+    	background-size: 26px 28px;
+    }
+}

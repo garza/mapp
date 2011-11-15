@@ -1,0 +1,85 @@
+<!-- 
+#################################################################################
+# © 2010 SunGard Higher Education.  All Rights Reserved.
+#
+# CONFIDENTIAL BUSINESS INFORMATION
+#
+# THIS PROGRAM IS PROPRIETARY INFORMATION OF SUNGARD HIGHER EDUCATION
+# AND IS NOT TO BE COPIED, REPRODUCED, LENT, OR DISPOSED OF,
+# NOR USED FOR ANY PURPOSE OTHER THAN THAT WHICH IT IS SPECIFICALLY PROVIDED
+# WITHOUT THE WRITTEN PERMISSION OF THE SAID COMPANY -->
+
+<!DOCTYPE HTML>
+<html>
+	<head>
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+		<title><%=Mshell.title%></title>
+    	
+    	<!-- CSS -->
+        <!-- JQuery Mobile CSS -->
+        <link rel="stylesheet" href="/app/Mshell/jquerymobile-1.0b1/jquery.mobile-1.0b1.min.css"/>
+        
+        <!-- Mobile Connection CSS -->
+    	<link rel="stylesheet" href="/app/Mshell/css/mc.css" /> 
+    	<link rel="stylesheet" href="/app/Mshell/css/mc-custom.css" />
+
+        <!-- Mshell CSS -->
+    	<link rel="stylesheet" href="/app/Mshell/css/mshell.css" /> 
+    	<link rel="stylesheet" href="/app/Mshell/css/mshell-custom.css" /> 
+
+        <!-- m-App CSS -->
+        <%  Mshell.get_mapp_jqm_files("css").each do |file|
+         %>
+        <link rel="stylesheet" href="<%= file %>" />
+        <%
+            end
+        %>
+
+        <!-- JavaScript -->
+        <!-- JQuery -->
+        <script src="/app/Mshell/jquery/jquery-1.6.1.min.js"></script>
+
+        <!-- Mobile Connection Mobile Inits -->
+    	<script src="/app/Mshell/js/mc-mobileinit.js"></script>
+    	<script src="/app/Mshell/js/mc-custom-mobileinit.js"></script>
+        
+        <!-- Mshell Mobile Inits -->
+    	<script src="/app/Mshell/js/mshell-mobileinit.js"></script>
+    	<script src="/app/Mshell/js/mshell-custom-mobileinit.js"></script>
+
+        <!-- m-App Mobile Inits -->
+        <%  Mshell.get_mapp_jqm_files("js", "-mobileinit.js").each do |file|
+         %>
+        <script src="<%= file %>"></script>
+        <%
+            end
+        %>
+
+        <!-- JavaScript -->
+        <!-- JQuery Mobile JS -->
+        <script src="/app/Mshell/jquerymobile-1.0b1/jquery.mobile-1.0b1.min.js"></script>
+        
+        <!-- TODO: need to add the css and js using Ruby code to add each configured m-app (mobileinit too)-->
+
+        <!-- Mobile Connection JS -->
+    	<script src="/app/Mshell/js/mc.js"></script>
+    	<script src="/app/Mshell/js/mc-custom.js"></script>
+        
+        <!-- Mshell JS -->
+    	<script src="/app/Mshell/js/mshell.js"></script>
+    	<script src="/app/Mshell/js/mshell-custom.js"></script>
+    	
+        <!-- m-App JS -->
+        <%  Mshell.get_mapp_jqm_files("js").each do |file|
+         %>
+        <script src="<%= file %>"></script>
+        <%
+            end
+        %>
+
+
+	</head>
+	<body>
+		<%= @content %>
+	</body>
+</html>

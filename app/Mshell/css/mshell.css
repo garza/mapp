@@ -1,0 +1,289 @@
+.headerLogo {
+	display:block;
+	margin:14px;
+	width:247px;
+	height:13px;
+}
+
+[data-icon="logo"] {
+    width: 247px;
+    height: 13px;
+	background:transparent url(../images/sghe-mobile-logo.png) no-repeat center 0px;
+}
+
+.footerLogIn:link,
+.footerLogIn:visited {
+	color:#fff;
+	text-decoration:none;
+	background:transparent url(../images/icon-lock.png) no-repeat left center;
+	padding-left:24px;
+}
+
+#login-login-failed  {
+	padding:10px 10px 20px 40px;
+	color:#fff;
+	text-shadow:0 -1px 0 rgba(0, 0, 0, 0.7);
+	background:transparent url(../images/icon-error.png) no-repeat 6px 11px;
+	margin:0px auto;
+	display: table;
+}
+
+/*-----------------------------------------------------------------------------------------------------------*/
+/* LIST VIEW */
+/*-----------------------------------------------------------------------------------------------------------*/
+#list-mshell-show-page .buttonListView li {
+	margin:10px 10px;
+	padding:0;
+	border-width:0px;
+	height:50px;
+	-webkit-border-radius:4px;
+	-webkit-box-shadow:0px 1px 1px rgba(0, 0, 0, 0.75);
+	background:#003659 -webkit-gradient(linear,50% 1.09049%,50% 96.7405%,
+	color-stop(0, rgba(255, 255, 255, 0.27)),
+	color-stop(0.5, rgba(255, 255, 255, 0.14)),
+	color-stop(0.51, rgba(255, 255, 255, 0.09)),
+	color-stop(1, rgba(255, 255, 255, 0)));
+}
+
+#list-mshell-show-page .buttonListView div {
+	height:48px;
+	margin:0;
+	border:1px rgba(255, 255, 255, 0.10) solid;
+	-webkit-border-radius: 4px;
+}
+
+#list-mshell-show-page .buttonListView img {
+	margin-top:-4px;
+}
+
+#list-mshell-show-page .buttonListView .ui-btn-inner {
+	border-width:0px;
+}
+
+#list-mshell-show-page .buttonListView li.locked div div {
+	background-image:url(../images/icon-lock.png);
+	background-position:88% 15px;
+	background-repeat:no-repeat;
+}
+
+/* iPad [portrait + landscape] */
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+	#list-mshell-show-page .buttonListView li.locked div div {
+		background-position:95% 15px;
+	}
+}
+
+/*-----------------------------------------------------------------------------------------------------------*/
+/* ICON VIEW */
+/*-----------------------------------------------------------------------------------------------------------*/
+
+#icon-mshell-show-page #icon-view div {
+	color:#fff;
+	text-align:center;
+	font:12px Arial, Helvetica, sans-serif;
+	margin-bottom:10px;
+}
+
+#icon-mshell-show-page #icon-view div a {
+	color:#fff;
+	text-decoration:none;
+	font-weight:normal;
+}
+
+#icon-mshell-show-page #icon-view div div {
+	margin:10px auto 4px;
+	padding:0;
+	border-width:0px;
+	height:57px;
+	width:57px;
+	-webkit-border-radius:4px;
+	-webkit-box-shadow:0px 1px 1px rgba(0, 0, 0, 0.75);
+	background:#003659 -webkit-gradient(linear,50% 1%,50% 97%,
+    	color-stop(0, rgba(255, 255, 255, 0.27)),
+    	color-stop(0.5, rgba(255, 255, 255, 0.14)),
+    	color-stop(0.51, rgba(255, 255, 255, 0.09)),
+    	color-stop(1, rgba(255, 255, 255, 0)));
+}
+
+#icon-mshell-show-page #icon-view div div.locked {
+	margin:10px auto 4px;
+	padding:0;
+	border-width:0px;
+	height:57px;
+	width:57px;
+	-webkit-border-radius:4px;
+	-webkit-border-bottom-right-radius:0;
+	-webkit-box-shadow:0px 1px 1px rgba(0, 0, 0, 0.75);
+	background-image:-webkit-gradient(linear,50% 1%,50% 97%,
+    	color-stop(0, rgba(255, 255, 255, 0.27)),
+    	color-stop(0.5, rgba(255, 255, 255, 0.14)),
+    	color-stop(0.51, rgba(255, 255, 255, 0.09)),
+    	color-stop(1, rgba(255, 255, 255, 0))),
+    	url(../images/icon-lock.png);
+	background-repeat:no-repeat;
+	background-position:right bottom;
+}
+
+#icon-mshell-show-page #icon-view div div span {
+	display:block;
+	height:55px;
+	margin:0;
+	border:1px rgba(255, 255, 255, 0.10) solid;
+	-webkit-border-radius: 4px;
+}
+
+#icon-mshell-show-page #icon-view .label {
+	margin:0px;
+	position:relative;
+	top:0px;
+}
+
+/* Grades, News, Schedule and Twitter Icons */
+
+#list-mshell-show-page .icon-grades{
+    width: 21px;
+    height: 19px;
+	background:url(../images/icon-grades.png) no-repeat center center;
+	background-size: 21px 19px;
+}
+#icon-mshell-show-page .icon-grades {
+	background:url(../images/icon-grades.png) no-repeat center center;
+	background-size: 21px 19px;
+}
+#list-mshell-show-page .icon-news {
+    width: 21px;
+    height: 19px;
+	background:url(../images/icon-news.png) no-repeat center center;
+	background-size: 20px 21px;
+}
+#icon-mshell-show-page .icon-news {
+	background:url(../images/icon-news.png) no-repeat center center;
+	background-size: 20px 21px;
+}
+#list-mshell-show-page .icon-schedule {
+    width: 20px;
+    height: 22px;
+	background:url(../images/icon-schedule.png) no-repeat center center;
+	background-size: 20px 22px;
+}
+#icon-mshell-show-page .icon-schedule {
+	background:url(../images/icon-schedule.png) no-repeat center center;
+	background-size: 20px 22px;
+}
+#list-mshell-show-page .icon-twitter {
+    width: 20px;
+    height: 20px;
+	background:url(../images/icon-twitter.png) no-repeat center center;
+	background-size: 20px 20px;
+}
+#icon-mshell-show-page .icon-twitter {
+	background:url(../images/icon-twitter.png) no-repeat center center;
+	background-size: 20px 20px;
+}
+
+/* Retina iPhone 4 - make sure we don't pick up iPad Retinia */
+/* -------------------------------------------------------------------------------------------------- */
+@media only screen and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) and (max-width: 767px),
+       only screen and (-webkit-min-device-pixel-ratio: 2) and (orientation: landscape) and (max-width: 800px){
+
+    [data-icon="logo"] {
+    	background:transparent url(../images/sghe-mobile-logo-2x.png) no-repeat center 0px;
+    	background-size: 247px 13px;
+    }
+
+
+    #list-mshell-show-page .icon-grades,
+    #icon-mshell-show-page .icon-grades {
+    	background:url(../images/icon-grades-2x.png) no-repeat center center;
+    	background-size: 21px 19px;
+    }
+    #list-mshell-show-page .icon-news,
+    #icon-mshell-show-page .icon-news {
+    	background:url(../images/icon-news-2x.png) no-repeat center center;
+    	background-size: 20px 21px;
+    }
+    #list-mshell-show-page .icon-schedule,
+    #icon-mshell-show-page .icon-schedule {
+    	background:url(../images/icon-schedule-2x.png) no-repeat center center;
+    	background-size: 20px 22px;
+    }
+    #list-mshell-show-page .icon-twitter,
+    #icon-mshell-show-page .icon-twitter {
+    	background:url(../images/icon-twitter-2x.png) no-repeat center center;
+    	background-size: 20px 20px;
+    }
+    #icon-mshell-show-page #icon-view div div.locked {
+		background-image:-webkit-gradient(linear,50% 1%,50% 97%,
+    		color-stop(0, rgba(255, 255, 255, 0.27)),
+    		color-stop(0.5, rgba(255, 255, 255, 0.14)),
+    		color-stop(0.51, rgba(255, 255, 255, 0.09)),
+    		color-stop(1, rgba(255, 255, 255, 0))),
+		url(../images/icon-lock-2x.png);
+		background-size: 57px 57px, 13px 16px;
+	}
+	
+	.footerLogIn:link,
+	.footerLogIn:visited {
+		background:transparent url(../images/icon-lock-2x.png) no-repeat left center;
+		background-size: 13px 16px;
+	}
+	
+	#login-login-failed  {
+    	background:transparent url(../images/icon-error-2x.png) no-repeat 6px 11px;
+    	background-size: 22px 22px;
+    }
+}
+
+/* Tablet - don't pick up Galaxy phones with resolution up to 800 */
+/* -------------------------------------------------------------------------------------------------- */
+@media only screen and (orientation: portrait) and (min-width: 768px),
+       only screen and (orientation: landscape) and (min-width: 1024px){
+           
+    #list-mshell-show-page .buttonListView li.locked div div {
+    	background-image:url(../images/icon-lock-2x.png);
+    	background-size: 13px 16px;
+    }
+           
+           
+    #icon-mshell-show-page .icon-grades {
+    	background:url(../images/icon-grades-tablet.png) no-repeat center center;
+    	background-size: 26px 24px;
+    }
+    #icon-mshell-show-page .icon-news {
+    	background:url(../images/icon-news-tablet.png) no-repeat center center;
+    	background-size: 27px 27px;
+    }
+    #icon-mshell-show-page .icon-schedule {
+    	background:url(../images/icon-schedule-tablet.png) no-repeat center center;
+    	background-size: 26px 27px;
+    }
+    #icon-mshell-show-page .icon-twitter {
+    	background:url(../images/icon-twitter-tablet.png) no-repeat center center;
+    	background-size: 26px 24px;
+    }
+    #icon-mshell-show-page #icon-view div div {
+		height:72px;
+		width:72px;
+		-webkit-border-radius:4px;
+		-webkit-box-shadow:0px 1px 1px rgba(0, 0, 0, 0.75);
+		background:#003659 -webkit-gradient(linear,50% 1%,50% 97%,
+    		color-stop(0, rgba(255, 255, 255, 0.27)),
+    		color-stop(0.5, rgba(255, 255, 255, 0.14)),
+    		color-stop(0.51, rgba(255, 255, 255, 0.09)),
+    		color-stop(1, rgba(255, 255, 255, 0)));
+	}
+	
+	#icon-mshell-show-page #icon-view div div.locked {
+		height:72px;
+		width:72px;
+		background-image:-webkit-gradient(linear,50% 1%,50% 97%,
+    		color-stop(0, rgba(255, 255, 255, 0.27)),
+    		color-stop(0.5, rgba(255, 255, 255, 0.14)),
+    		color-stop(0.51, rgba(255, 255, 255, 0.09)),
+    		color-stop(1, rgba(255, 255, 255, 0))),
+    		url(../images/icon-lock-tablet.png);
+	}
+	#icon-mshell-show-page #icon-view div div span {
+		height:70px;
+	}
+}

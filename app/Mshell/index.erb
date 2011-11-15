@@ -1,0 +1,31 @@
+<!-- 
+#################################################################################
+# © 2010 SunGard Higher Education.  All Rights Reserved.
+#
+# CONFIDENTIAL BUSINESS INFORMATION
+#
+# THIS PROGRAM IS PROPRIETARY INFORMATION OF SUNGARD HIGHER EDUCATION
+# AND IS NOT TO BE COPIED, REPRODUCED, LENT, OR DISPOSED OF,
+# NOR USED FOR ANY PURPOSE OTHER THAN THAT WHICH IT IS SPECIFICALLY PROVIDED
+# WITHOUT THE WRITTEN PERMISSION OF THE SAID COMPANY -->
+
+<div data-role="page" id="mshell-index-page" data-theme="g" data-add-back-btn="false">
+
+    <div data-role="header" data-theme="f" data-position="fixed">
+        <img data-icon="logo" src="images/blank.gif" class="headerLogo">
+        <img data-icon="menu" src="<%= Mshell.path %>/images/blank.gif" class="menu-link">
+    </div><!-- /header -->
+
+	<div data-role="content">
+	    <div class="menu-tab"><img data-icon="menu" src="<%= Mshell.path %>/images/blank.gif"></div>
+		<div class="menu">	
+			<ul>
+        		<li><a href="<%= Mshell.show_url %>" ddata-rel="external" data-direction="reverse" class="home"><%= Locale::Mc[:label_home] %></a></li>
+			</ul>
+			<br style="clear:both;"/>
+		</div>
+	</div><!-- /content -->
+	
+	<div data-role="footer" data-theme="f" data-position="fixed" class="ui-bar">
+    </div><!-- /footer -->
+</div><!-- /page -->

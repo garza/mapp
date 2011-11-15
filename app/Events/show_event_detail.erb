@@ -1,0 +1,74 @@
+<!-- 
+#################################################################################
+# © 2010 SunGard Higher Education.  All Rights Reserved.
+#
+# CONFIDENTIAL BUSINESS INFORMATION
+#
+# THIS PROGRAM IS PROPRIETARY INFORMATION OF SUNGARD HIGHER EDUCATION
+# AND IS NOT TO BE COPIED, REPRODUCED, LENT, OR DISPOSED OF,
+# NOR USED FOR ANY PURPOSE OTHER THAN THAT WHICH IT IS SPECIFICALLY PROVIDED
+# WITHOUT THE WRITTEN PERMISSION OF THE SAID COMPANY -->
+
+<%
+  eventToDisplay = get_event_detail()  
+%>
+<div id="events-show-event-detail-page" data-role="page" data-cache="false">
+    <div data-role="header" data-position="fixed" data-theme="f" data-cache="false" class="imageButtons">
+        <a href="<%= url_for( :action => :index ) %>" data-direction="reverse"><img data-icon="back" src="<%= Mshell.path %>/images/blank.gif"/></a>
+        <h1><%=Locale::Events[:title_event_detail] %></h1>
+        <img data-icon="menu" src="<%= Mshell.path %>/images/blank.gif" class="menu-link">
+    </div><!-- /header -->
+
+	<div data-role="content" data-theme="g">
+	    <!-- Menu -->
+	    <div class="menu-tab"><img data-icon="menu" src="<%= Mshell.path %>/images/blank.gif"></div>
+		<div class="menu">	
+			<ul>
+        		<li><a href="<%= Mshell.show_url %>" data-direction="reverse" class="home"><%= Locale::Mc[:label_home] %></a></li>
+			</ul>
+			<br class="clear"/>
+		</div><!-- /Menu -->
+        
+		<div class="eventDetail"> 
+			<h3><%=eventToDisplay["summary"]%></h3>
+			<span><%=eventToDisplay['startDate']%></span> 
+			<p><%=eventToDisplay['startTime']%> - <%=eventToDisplay['endTime']%></p> 
+			<p><%=eventToDisplay['description']%></p> 
+		</div> 
+		<div class="eventDetail"> 
+			<ul> 
+				<%if eventToDisplay['contact'] && eventToDisplay['contact'] != '' %>
+				<li class="mc-phone-icon"> 
+					<a href="#"> 
+						<div><%= Locale::Events[:label_phone] %></div> 
+						<div>(345) 678-9012</div> 
+						<br class="clear"> 
+					</a> 
+				</li> 
+				<%end%>
+				<%if eventToDisplay['email'] && eventToDisplay['email'] != '' %>
+				<li class="mc-email-icon"> 
+					<a href="#"> 
+						<div><%= Locale::Events[:label_email] %></div> 
+						<div><%=eventToDisplay['email']%></div> 
+						<br class="clear"> 
+					</a> 
+				</li> 
+				<%end%>
+				<%if eventToDisplay['location'] && eventToDisplay['location'] != '' %>
+				<li class="mc-interstate-icon"> 
+					<a href="#"> 
+						<div><%= Locale::Events[:label_location] %></div> 
+						<div><%=eventToDisplay['location']%></div> 
+						<br class="clear"> 
+					</a> 
+				</li> 
+				<%end%>
+			</ul> 
+			
+		</div> 
+	</div> 
+
+	<div id="events-show-event-detail-footer" data-role="footer" data-position="fixed" data-theme="f">
+	</div><!-- /footer -->
+</div>
