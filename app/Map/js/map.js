@@ -15,7 +15,7 @@ function getGeoLocation() {
 		$("#map-show-header").attr("data-longitude", data[2]);
 		$("#map-show-header").attr("data-location", data[0]);
 		updatePosition();
-		setTimeout("getGeoLocation()",30000);
+		config.geoTimeout = setTimeout("getGeoLocation()",3000);
 	});
 }
 
@@ -214,6 +214,7 @@ $('#map-show-page').live("pagecreate", function() {
 $('#map-show-page').live('pageshow',function(){
 	setContentHeight();
 	google.maps.event.trigger(map, 'resize');
+	config.geoTimeout = null;
 	getGeoLocation();
 });
 
