@@ -59,7 +59,7 @@ function updatePosition() {
 function changeCampus(campusStr) {
 	var campusPos = config[""+campusStr];
 	map.panTo(campusPos);
-	map.setZoom(15);
+	map.setZoom(16);
 }
 
 function loadSelectedMap(jqObject) {
@@ -149,7 +149,7 @@ function initializeMap() {
 	config.Downtown = new google.maps.LatLng(29.423880,-98.503339);
 	config.ITC = new google.maps.LatLng(29.416701,-98.482186);
 	config.mapOpts = {
-			zoom: 15,
+			zoom: 16,
 			center: config.Main,
 			mapTypeControl: true,
 			mapTypeControlOptions: {
