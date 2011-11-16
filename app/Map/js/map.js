@@ -3,7 +3,6 @@
 var config = config ? config : {},
 map = null;
 
-
 /*
 navigator.geolocation.getCurrentPosition(function(){
 	console.log(this);
@@ -57,8 +56,10 @@ function updatePosition() {
 	}
 }
 
-/* load our map center co-ordinates for each major map */
-function loadCampuses() {
+function changeCampus(campusStr) {
+	var campusPos = config[""+campusStr];
+	map.panTo(campusPos);
+	map.setZoom(15);
 }
 
 function loadSelectedMap(jqObject) {
@@ -75,19 +76,9 @@ function loadSelectedMap(jqObject) {
 	
 	config.currentCampus = button.attr('data-map');
 	config.defaultSrcId = button.attr('data-srcid');
-	console.log("attempting pan to:");
-	console.dir(config);
-	map.panTo(config[config.currentCampus]); 
-	//updateFTLayer();
-	map.setZoom(17);
-}
-
-function loadMap(page) {
-	config.map = new google.maps.Map(document.getElementById("map-div"), config.mapOpts);
-	//updateFTLayer();
-	//DEBUG COMMENT OUT NEXT LINE
-	getGeoLocation();
-	page.data('map', config.map);
+	//console.log("attempting pan to: " + config.currentCampus);
+	changeCampus(config.currentCampus);
+	updateFTLayer();
 }
 
 function updateFTLayer() {
@@ -99,13 +90,20 @@ function updateFTLayer() {
 	if (!defaultSrcId) {
 		defaultSrcId = 2052993;
 	}
-	console.log("updateFTLayer with campus: " + currentCampus + " src id: " + defaultSrcId);
+	//console.log("updateFTLayer with campus: " + currentCampus + " src id: " + defaultSrcId);
 	if (!config.FTLayer) {
 		//we need to create our layer!
 		config.FTLayer = new google.maps.FusionTablesLayer({
 			styles: [{
+				where: "icon = 'building'",
 				markerOptions: {
 					iconName: "buildings"
+				}
+			},
+			{
+				where: "icon = 'parking_lot'",
+				markerOptions: {
+					iconName: "parking_lot"
 				}
 			}],
 			query: {
@@ -114,7 +112,8 @@ function updateFTLayer() {
 				where: 'campus = \'' + currentCampus + '\''
 			}
 		});
-		//config.FTLayer.setQuery("select Abbrv, Building from 2052993");
+		config.FTLayer.setMap(map);
+	    google.maps.event.addListener(config.FTLayer, 'click', displayMarkerBox);
 	} else {
 		//we just need to update our layer options
 		config.FTLayer.setOptions({
@@ -125,17 +124,32 @@ function updateFTLayer() {
 			}
 		});
 	}
-	config.FTLayer.setMap(config.map);
-    google.maps.event.addListener(config.FTLayer, 'click', displayMarkerBox);
 }
 
+function reduceLayer(newCampus, abbrvStr) {
+	var defaultSrcId = config.defaultSrcId;
+	changeCampus(newCampus);
+	//console.log("updateFTLayer with campus: " + newCampus + " abbrv: " + abbrvStr);
+	if(config.FTLayer) {
+		config.FTLayer.setOptions({
+			query: {
+				select: "location, building, abbrv",
+				from: defaultSrcId,
+				where: 'campus = \'' + newCampus + '\' AND abbrv = \'' + abbrvStr + '\''
+			}
+		});
+	}
+}
 
 function initializeMap() {
-	config.Main = new google.maps.LatLng(29.583310,-98.619285);
+	var button = $("#map-show-page").find('a.[data-role="radio-button"].ui-btn-active');
+	config.currentCampus = button.attr('data-map');
+	config.defaultSrcId = button.attr('data-srcid');
+	config.Main = new google.maps.LatLng(29.5828745,-98.6187745);
 	config.Downtown = new google.maps.LatLng(29.423880,-98.503339);
 	config.ITC = new google.maps.LatLng(29.416701,-98.482186);
 	config.mapOpts = {
-			zoom: 17,
+			zoom: 15,
 			center: config.Main,
 			mapTypeControl: true,
 			mapTypeControlOptions: {
@@ -145,10 +159,12 @@ function initializeMap() {
 			zoomControlOptions: {
 				style: google.maps.ZoomControlStyle.SMALL
 			},
-			mapTypeId: google.maps.MapTypeId.ROADMAP
+		    mapTypeId: google.maps.MapTypeId.SATELLITE
+			//mapTypeId: google.maps.MapTypeId.ROADMAP
 	};
-	console.dir(document.getElementById("map-div"));
+	//console.dir(document.getElementById("map-div"));
 	map = new google.maps.Map($("#map-div")[0], config.mapOpts);
+	updateFTLayer();
 	//document.getElementById("map-div"), config.mapOpts);
 }
 
@@ -164,11 +180,9 @@ function setContentHeight() {
 }
 
 function displayMarkerBox(mouseEvent) {
-	console.dir(mouseEvent);
-	var content = '<div id="content"><b>' + mouseEvent.row['building'].value + ' ('+ mouseEvent.row['abbrv'].value +')</b></div>';
+	var content = '<div id="info-content"><b>' + mouseEvent.row['building'].value + ' ('+ mouseEvent.row['abbrv'].value +')</b></div>';
 	mouseEvent.infoWindowHtml = content;
 }
-
 
 //event handler for navigation button clicks
 $('a.[data-role="radio-button"]').live('click', function() {
@@ -176,39 +190,36 @@ $('a.[data-role="radio-button"]').live('click', function() {
     return true
 });
 
+//event handler for navigation button clicks
+$('a.place').live('click', function(evt) {
+	var passed = $(evt.target).data(),
+		campus = passed.campus,
+		abbrv = passed.abbrv;
+	config.reduce = { "campus": campus, "abbrv": abbrv};
+	google.maps.event.trigger(map, 'resize');
+	reduceLayer(campus, abbrv);
+	evt.preventDefault();
+	evt.stopPropagation();
+	config.event = evt;
+	$(".ui-dialog").dialog('close');
+	//$('.ui-dialog').dialog('close');
+	//$("#search-show-page").
+	return true
+});
 
 $('#map-show-page').live("pagecreate", function() {
-	console.log("pagecreate");
+	initializeMap();
 });
 
 $('#map-show-page').live('pageshow',function(){
-	console.log("pageshow");
-	initializeMap();
-	google.maps.event.trigger(map, 'resize');
-	map.setOptions(config.mapOpts); 
-});
-
-/*
-$('#map-show-page').live("pageshow", function() {
-	console.log("Set Content Height");
 	setContentHeight();
-	console.log("Init Map");
-	initializeMap();
+	google.maps.event.trigger(map, 'resize');
+	getGeoLocation();
 });
-
-$('#map-show-page').live("pageshow", function() {    
-	//google.maps.event.trigger(config.map, 'resize');
-	//config.map.setOptions(config.mapOpts);
-	//loadCampuses();
-	//loadMap(page);
-	//loadSelectedMap(page);
-});
-*/
 
 //disable clicking on terms
-//$('#map-show-page #map-div a').live("click", function(event) {
+$('#map-show-page #map-div a').live("click", function(event) {
     /* kludge to fix linking to terms of service and map link */
-    //event.preventDefault()
-    //return false    
-//});
-
+    event.preventDefault()
+    return false    
+});
