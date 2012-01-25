@@ -64,6 +64,10 @@ class MapController < Rho::RhoController
     def places
       render :places
     end
+    
+    def directions
+      redner :directions
+    end
         
     def show
         # check for network

@@ -75,7 +75,7 @@ function loadSelectedMap(jqObject) {
 	}
 	
 	config.currentCampus = button.attr('data-map');
-	config.defaultSrcId = button.attr('data-srcid');
+	config.defaultSrcId = button.attr('data-srcid') - 0;
 	//console.log("attempting pan to: " + config.currentCampus);
 	changeCampus(config.currentCampus);
 	updateFTLayer();
@@ -83,68 +83,44 @@ function loadSelectedMap(jqObject) {
 
 function updateFTLayer() {
 	var defaultSrcId = config.defaultSrcId,
-		currentCampus = config.currentCampus;
+		currentCampus = config.currentCampus,
+		layerQuery = '';
 	if (!currentCampus) {
 		currentCampus = "Main";
 	}
 	if (!defaultSrcId) {
 		defaultSrcId = 2052993;
 	}
-	//console.log("updateFTLayer with campus: " + currentCampus + " src id: " + defaultSrcId);
+	layerQuery = "SELECT 'location', 'building', 'abbrv' FROM " + defaultSrcId + " WHERE campus = '" + currentCampus + "'";
 	if (!config.FTLayer) {
 		//we need to create our layer!
-		config.FTLayer = new google.maps.FusionTablesLayer({
-			styles: [{
-				where: "icon = 'building'",
-				markerOptions: {
-					iconName: "buildings"
-				}
-			},
-			{
-				where: "icon = 'parking_lot'",
-				markerOptions: {
-					iconName: "parking_lot"
-				}
-			}],
-			query: {
-				select: "location, building, abbrv",
-				from: defaultSrcId,
-				where: 'campus = \'' + currentCampus + '\''
-			}
-		});
+		config.FTLayer = new google.maps.FusionTablesLayer(defaultSrcId);
+		config.FTLayer.setQuery(layerQuery);
 		config.FTLayer.setMap(map);
 	    google.maps.event.addListener(config.FTLayer, 'click', displayMarkerBox);
 	} else {
 		//we just need to update our layer options
-		config.FTLayer.setOptions({
-			query: {
-				select: "location, building, abbrv",
-				from: defaultSrcId,
-				where: 'campus = \'' + currentCampus + '\''
-			}
-		});
+		config.FTLayer.setTableId(defaultSrcId);
+		config.FTLayer.setQuery(layerQuery);
 	}
 }
 
 function reduceLayer(newCampus, abbrvStr) {
-	var defaultSrcId = config.defaultSrcId;
+	var defaultSrcId = config.defaultSrcId, reduceQuery = '';
+	
+	reduceQuery = "SELECT 'location', 'building', 'abbrv' FROM " + defaultSrcId + " WHERE abbrv = '" + abbrvStr + "'";
 	changeCampus(newCampus);
+	
 	//console.log("updateFTLayer with campus: " + newCampus + " abbrv: " + abbrvStr);
 	if(config.FTLayer) {
-		config.FTLayer.setOptions({
-			query: {
-				select: "location, building, abbrv",
-				from: defaultSrcId,
-				where: 'campus = \'' + newCampus + '\' AND abbrv = \'' + abbrvStr + '\''
-			}
-		});
+		config.FTLayer.setQuery(reduceQuery);
 	}
 }
 
 function initializeMap() {
 	var button = $("#map-show-page").find('a.[data-role="radio-button"].ui-btn-active');
 	config.currentCampus = button.attr('data-map');
-	config.defaultSrcId = button.attr('data-srcid');
+	config.defaultSrcId = button.attr('data-srcid') - 0;
 	config.Main = new google.maps.LatLng(29.5828745,-98.6187745);
 	config.Downtown = new google.maps.LatLng(29.423880,-98.503339);
 	config.ITC = new google.maps.LatLng(29.416701,-98.482186);
@@ -180,9 +156,34 @@ function setContentHeight() {
 }
 
 function displayMarkerBox(mouseEvent) {
-	var content = '<div id="info-content"><b>' + mouseEvent.row['building'].value + ' ('+ mouseEvent.row['abbrv'].value +')</b></div>';
+	var ourPos = mouseEvent.latLng,
+		content = '<div id="info-content"><b>' + mouseEvent.row['building'].value + ' ('+ mouseEvent.row['abbrv'].value +')</b>';
+		//'<br/><br/><a href="" class="dir" data-role="button" data-lat="' + ourPos.lat() + '" data-lng="' + ourPos.lng() + '">Get Directions</a>' +
+		//'<br/><br/><a href="/app/Map/openMap?ll=' + ourPos.lat() + ',' + ourPos.lng() +'">Test Route</a></div>';
 	mouseEvent.infoWindowHtml = content;
 }
+//http://maps.google.com/maps?q=425+Goshen+Road+Edwardsville,+IL&hnear=425+Goshen+Rd,+Edwardsville,+Illinois+62025&t=m&z=16&vpsrc=0
+//<a href="http://www.google.com/?rho_open_target=_blank">Open Google in external browser</a>
+
+// http://maps.google.com/maps?
+// ll=37.0625,-95.677068&
+// spn=42.901912,46.40625&
+// ui=maps&t=m&z=4&vpsrc=1
+
+// 
+//http://maps.google.com/maps?ll=37.0625,-95.677068&spn=42.901912,46.40625
+
+
+$('.dir').live('click', function(evt) {
+	var tele = $(evt.currentTarget), lat = tele.data("lat"), lng = tele.data("lng"),
+		dirReq = 'http://maps.googleapis.com/maps/api/directions/json?' +
+			'origin=' + config.myPos.lat() + ',' + config.myPos.lng() + '&' +
+			'destination=' + lat + ',' + lng + '&' +
+			'sensor=true';
+	console.log(dirReq);
+	evt.preventDefault();
+	evt.stopPropagation();
+});
 
 //event handler for navigation button clicks
 $('a.[data-role="radio-button"]').live('click', function() {
