@@ -157,7 +157,7 @@ function setContentHeight() {
 
 function displayMarkerBox(mouseEvent) {
 	var ourPos = mouseEvent.latLng,
-		content = '<div id="info-content"><b>' + mouseEvent.row['building'].value + ' ('+ mouseEvent.row['abbrv'].value +')</b>';
+		content = '<div id="info-content"><b>' + mouseEvent.row['building'].value + ' ('+ mouseEvent.row['abbrv'].value +')</b></div>';
 		//'<br/><br/><a href="" class="dir" data-role="button" data-lat="' + ourPos.lat() + '" data-lng="' + ourPos.lng() + '">Get Directions</a>' +
 		//'<br/><br/><a href="/app/Map/openMap?ll=' + ourPos.lat() + ',' + ourPos.lng() +'">Test Route</a></div>';
 	mouseEvent.infoWindowHtml = content;
